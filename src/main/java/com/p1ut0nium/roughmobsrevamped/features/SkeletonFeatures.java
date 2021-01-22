@@ -20,7 +20,6 @@ import net.minecraft.entity.monster.EntityStray;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class SkeletonFeatures extends EntityFeatures {
 

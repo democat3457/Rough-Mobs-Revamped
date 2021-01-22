@@ -13,7 +13,6 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class GhastFeatures extends EntityFeatures {
 
