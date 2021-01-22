@@ -32,7 +32,7 @@ minecraft {
 }
 
 repositories {
-	maven { url 'https://maven.mcmoddev.com' }
+	maven { url 'https://mmdmaven.blamejared.com' }
 	maven {
 		name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"

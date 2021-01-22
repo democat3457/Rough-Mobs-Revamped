@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class CreeperFeatures extends EntityFeatures {
 	
@@ -52,10 +52,10 @@ public class CreeperFeatures extends EntityFeatures {
 		if (entity instanceof EntityCreeper) 
 		{
 			if (fuseTime != 30)
-				ReflectionHelper.setPrivateValue(EntityCreeper.class, (EntityCreeper)entity, fuseTime, 5);
+                ((EntityCreeper)entity).fuseTime = fuseTime;
 			
 			if (explosionRadius != 3)
-				ReflectionHelper.setPrivateValue(EntityCreeper.class, (EntityCreeper)entity, explosionRadius, 6);
+				((EntityCreeper)entity).explosionRadius = explosionRadius;
 			
 			if (creeperBurnExplosion)
 				tasks.addTask(0, new RoughAIBurnExplosion((EntityCreeper)entity));

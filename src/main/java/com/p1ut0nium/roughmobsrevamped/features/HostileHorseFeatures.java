@@ -71,7 +71,7 @@ public class HostileHorseFeatures extends EntityFeatures {
 			return;
 		}
 		if (entity instanceof EntityLiving && shouldDespawn(entity))
-			ReflectionHelper.setPrivateValue(EntityLiving.class, (EntityLiving)entity, false, 17);
+			((EntityLiving)entity).persistenceRequired = false;
 	}
 	
 	private boolean shouldDespawn(Entity entity) {

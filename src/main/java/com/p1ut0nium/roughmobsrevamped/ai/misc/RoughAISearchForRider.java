@@ -112,8 +112,11 @@ public class RoughAISearchForRider extends EntityAIBase {
         this.mountSearcher = null;
     }
 
+    @SuppressWarnings("unused")
     private boolean isPossibleRider(EntityLivingBase entity) {
-        for (Class<? extends Entity> clazz : possibleRiders) { if (clazz.isInstance(entity)) { return true; } }
+        for (Class<? extends Entity> clazz : possibleRiders)
+            if (clazz.isInstance(entity))
+                return true;
         return false;
     }
 }

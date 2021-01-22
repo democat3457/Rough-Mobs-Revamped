@@ -37,7 +37,6 @@ import com.p1ut0nium.roughmobsrevamped.util.handlers.SoundHandler;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.MinecraftForge;

@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class RoughAIDespawn extends EntityAIBase {
 
@@ -46,7 +45,7 @@ public class RoughAIDespawn extends EntityAIBase {
 	        }
 	        else if (d3 < 1024.0D)
 	        {
-	        	ReflectionHelper.setPrivateValue(EntityLivingBase.class, entity, 0, "idleTime", "field_70708_bq");
+	        	entity.idleTime = 0;
 	        }
 	    }
 	}

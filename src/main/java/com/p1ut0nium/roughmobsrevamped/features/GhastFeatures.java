@@ -41,7 +41,7 @@ public class GhastFeatures extends EntityFeatures {
 		if (entity instanceof EntityGhast)
 		{
 			if (explosionRadius != 1)
-				ReflectionHelper.setPrivateValue(EntityGhast.class, (EntityGhast)entity, explosionRadius, 1);
+				((EntityGhast)entity).explosionStrength = explosionRadius;
 		}
 		
 		if (dropTnt && entity instanceof EntityLiving)

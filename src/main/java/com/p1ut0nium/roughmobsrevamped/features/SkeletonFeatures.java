@@ -96,7 +96,7 @@ public class SkeletonFeatures extends EntityFeatures {
 		
 		if (entity instanceof AbstractSkeleton)
 		{
-			EntityAIAttackRangedBow<AbstractSkeleton> ai = ReflectionHelper.getPrivateValue(AbstractSkeleton.class, (AbstractSkeleton) entity, 1);
+			EntityAIAttackRangedBow<AbstractSkeleton> ai = ((AbstractSkeleton) entity).aiArrowAttack;
 			if (ai != null)
 				ai.setAttackCooldown(bowCooldown);
 		}

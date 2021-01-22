@@ -1,7 +1,9 @@
 package com.p1ut0nium.roughmobsrevamped.misc;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +31,6 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class SpawnHelper {
 	
@@ -45,11 +46,24 @@ public class SpawnHelper {
 		return disableBabyZombies;
 	}
 
+    @SuppressWarnings("unchecked")
 	public static class SpawnEntry {
 		
-		public static final Map<String, Type> TYPE_MAP = ReflectionHelper.getPrivateValue(BiomeDictionary.Type.class, null, 0);
+		public static final Map<String, Type> TYPE_MAP;
 		public static final String OW_TYPE = "OVERWORLD";
-		public static final String DISABLE_KEY = "!";
+        public static final String DISABLE_KEY = "!";
+        
+        static {
+            Map<String, Type> temp = new HashMap<>();
+            try {
+                Field typeMap = BiomeDictionary.Type.class.getDeclaredField("byName");
+                typeMap.setAccessible(true);
+                temp = (Map<String, Type>) typeMap.get(null);
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            TYPE_MAP = temp;
+        }
 		
 		private boolean valid = true;
 		private String error = "";
@@ -120,7 +134,7 @@ public class SpawnHelper {
 			
 			if (biomes.length == 0) 
 			{
-				for (Biome biome : Biome.REGISTRY) 
+				for (Biome biome : ForgeRegistries.BIOMES)
 					listAdd.add(biome);
 			}
 			
@@ -158,7 +172,6 @@ public class SpawnHelper {
 			}
 		}
 
-		@SuppressWarnings("unchecked")
 		private Class<? extends EntityLiving> getEntityClass(String entityName) {
 			
 			Class<? extends Entity> clazz = EntityList.getClass(new ResourceLocation(entityName));
