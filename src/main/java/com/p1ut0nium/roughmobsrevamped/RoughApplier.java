@@ -317,13 +317,14 @@ public class RoughApplier {
 			event.getEntityLiving().setRevengeTarget(player);
 			((EntityLiving)event.getEntityLiving()).setAttackTarget(player);
 			
-			// much less often
-			System.out.println("invalidAttacker = " + invalidAttacker.getName() + "; blocked target");
+            // much less often
+            if (TargetHelper.enableBlockDebug)
+			    System.out.println("invalidAttacker = " + invalidAttacker.getName() + "; blocked target");
 		}
 		
 		// else if invalidAttacker = null
 		// we currently do nothing
-		// however, spams console so is commented out
-		// System.out.println("InvalidAttacker = null; do nothing");
+        if (TargetHelper.enableBlockDebug)
+            System.out.println("InvalidAttacker = null; do nothing");
 	}
 }

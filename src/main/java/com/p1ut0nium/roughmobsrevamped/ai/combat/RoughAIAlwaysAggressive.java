@@ -1,8 +1,7 @@
 package com.p1ut0nium.roughmobsrevamped.ai.combat;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Field;
-import net.minecraft.entity.Entity;
+import com.p1ut0nium.roughmobsrevamped.RoughMobs;
+
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,21 +16,12 @@ public class RoughAIAlwaysAggressive extends EntityAIBase {
 	private int aggressiveRange;
 	private boolean isAngry;
 	
-	//private Method becomeAngryMethod;
-	//private Field angerLevelField;
-	
 	public RoughAIAlwaysAggressive(EntityLiving entity, int aggressiveRange) {
 
 		this.entity = entity;
 		this.aggressiveRange = aggressiveRange;
 		this.isAngry = true;
 		this.setMutexBits(4);
-
-		//becomeAngryMethod = ReflectionHelper.findMethod(EntityPigZombie.class, "becomeAngryAt", "func_70835_c", Entity.class);
-		//becomeAngryMethod.setAccessible(true);
-
-		//angerLevelField = ReflectionHelper.findField(EntityPigZombie.class, "field_70837_d");
-		//angerLevelField.setAccessible(true);
 	}
 
     /**
@@ -105,39 +95,22 @@ public class RoughAIAlwaysAggressive extends EntityAIBase {
     }
 	
 	private void setAngry(boolean isAngry) {
-		
-		if (isAngry) {	
-			try {
-				Method becomeAngryAt = EntityPigZombie.class.getDeclaredMethod("becomeAngryAt", Entity.class);
-				becomeAngryAt.setAccessible(true);		
-				becomeAngryAt.invoke(entity, entity.world.getClosestPlayerToEntity(entity, aggressiveRange));
-			}
-			catch (Exception e) {
-				try {
-					Method becomeAngryAt = EntityPigZombie.class.getDeclaredMethod("func_70835_c", Entity.class);
-					becomeAngryAt.setAccessible(true);
-					becomeAngryAt.invoke(entity, entity.world.getClosestPlayerToEntity(entity, aggressiveRange));
-				} 
-				catch (Exception e2) {
-					e2.printStackTrace();
-				} 
-			}	
-		} else {
-			try {
-				Field angerLevel = EntityPigZombie.class.getDeclaredField("angerLevel");
-				angerLevel.setAccessible(true);
-				angerLevel.setInt(entity, 0);
-			} catch (Exception e) {
-				try {
-					Field angerLevel = EntityPigZombie.class.getDeclaredField("field_70837_d");
-					angerLevel.setAccessible(true);;
-					angerLevel.setInt(entity, 0);
-				}
-				catch (Exception e2) {
-					e2.printStackTrace();
-				}
-			}
-		}
+        if (entity instanceof EntityPigZombie) {
+            if (isAngry) {	
+                try {
+                    ((EntityPigZombie) entity).becomeAngryAt(entity.world.getClosestPlayerToEntity(entity, aggressiveRange));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }	
+            } else {
+                try {
+                    ((EntityPigZombie) entity).angerLevel = 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } 
+        } else
+            RoughMobs.logger.error("Tried to set anger state of entity \"" + entity.getClass().getName() + "\"");
 		
 		this.isAngry = isAngry;
 	}

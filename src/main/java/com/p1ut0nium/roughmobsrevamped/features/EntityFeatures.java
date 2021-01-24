@@ -87,7 +87,7 @@ public abstract class EntityFeatures {
 	public void onDeath(Entity deadEntity, DamageSource source) {
 		// If the mob was killed by a player, update the player's kill count.
 		if (source.getTrueSource() instanceof EntityPlayer) {
-			//TODO PlayerHelper.setPlayerMobKills();
+            //TODO PlayerHelper.setPlayerMobKills();
 		}
 	}
 	
